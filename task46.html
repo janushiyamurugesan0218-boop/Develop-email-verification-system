@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verification System</title>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background:#f4f4f4;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+    }
+
+    .container{
+        background:#fff;
+        padding:25px;
+        border-radius:10px;
+        width:350px;
+        box-shadow:0 0 10px rgba(0,0,0,0.1);
+        text-align:center;
+    }
+
+    input{
+        width:100%;
+        padding:10px;
+        margin:10px 0;
+        box-sizing:border-box;
+    }
+
+    button{
+        background:#007bff;
+        color:white;
+        border:none;
+        padding:10px 20px;
+        cursor:pointer;
+        border-radius:5px;
+    }
+
+    button:hover{
+        background:#0056b3;
+    }
+
+    #message{
+        margin-top:15px;
+        font-weight:bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Email Verification</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <button onclick="sendOTP()">Send Verification Code</button>
+
+    <input type="text" id="otp" placeholder="Enter Verification Code">
+
+    <button onclick="verifyOTP()">Verify Email</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+let generatedOTP = "";
+
+function sendOTP() {
+    const email = document.getElementById("email").value;
+
+    if(email === "") {
+        alert("Please enter your email.");
+        return;
+    }
+
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+    document.getElementById("message").innerHTML =
+        "Verification code sent!<br><br>Demo OTP: <b>" + generatedOTP + "</b>";
+}
+
+function verifyOTP() {
+    const enteredOTP = document.getElementById("otp").value;
+
+    if(enteredOTP === generatedOTP && generatedOTP !== "") {
+        document.getElementById("message").innerHTML =
+            "<span style='color:green'>✓ Email Verified Successfully!</span>";
+    } else {
+        document.getElementById("message").innerHTML =
+            "<span style='color:red'>✗ Invalid Verification Code</span>";
+    }
+}
+</script>
+
+</body>
+</html>
